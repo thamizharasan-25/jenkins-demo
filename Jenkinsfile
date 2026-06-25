@@ -1,21 +1,19 @@
 pipeline {
     agent any
+
     stages {
+
         stage('Checkout') {
-    steps {
-        git branch: 'main',
-            url: 'https://github.com/thamizharasan-25/jenkins-demo.git'
-    }
-}
-        stage('Build') {
             steps {
-                sh 'echo Building...'
+                checkout scm
             }
         }
-        stage('Test') {
+
+        stage('Build Docker Image') {
             steps {
-                sh 'echo Testing...'
+                sh 'docker build -t flask-app .'
             }
         }
+
     }
 }
